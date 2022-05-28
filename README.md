@@ -1,6 +1,7 @@
 👀 Демо: <Link>
 
 📝 Полный стек:
+
 - ReactJS 18
 - TypeScript
 - Redux Toolkit (хранение данных / пицц)

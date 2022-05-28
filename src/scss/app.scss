@@ -33,6 +33,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media (max-width: 1024px) {
+      flex-direction: column;
+      align-items: flex-start;
+      overflow: hidden;
+    }
   }
 }
 
@@ -220,7 +225,7 @@ body {
 
         &:last-of-type {
           b {
-            color: $orange;
+            color: $gold;
           }
         }
       }

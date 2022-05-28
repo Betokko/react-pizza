@@ -15,8 +15,8 @@
     }
 
     span {
-      color: $orange;
-      border-bottom: 1px dashed $orange;
+      color: $gold;
+      border-bottom: 1px dashed $gold;
       cursor: pointer;
     }
   }
@@ -40,12 +40,12 @@
 
         &.active,
         &:hover {
-          background: rgba(254, 95, 30, 0.05);
+          background: $gray-line
         }
 
         &.active {
           font-weight: bold;
-          color: $orange;
+          color: $gold;
         }
       }
     }
