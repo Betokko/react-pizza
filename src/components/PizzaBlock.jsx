@@ -3,7 +3,7 @@ import { useState } from "react";
 function PizzaBlock({ title, price, imageUrl, sizes, types }) {
   const [sizeActive, setSizeActive] = useState(0);
   const [typeActive, setTypeIsActive] = useState(0);
-  const typeNames = ["карбон", "базальт"];
+  const typeNames = ["тонкое", "традиционное"];
 
   return (
     <div className="pizza-block">

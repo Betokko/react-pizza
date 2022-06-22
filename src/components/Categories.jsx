@@ -5,9 +5,10 @@ export const Categories = () => {
 
   const catrgories = [
     "Все",
-    "Mercedes",
-    "BMW",
-    "Cadillac",
+    "Мясные",
+    "Грилль",
+    "Веганские",
+    "Острые",
   ];
 
   return (
