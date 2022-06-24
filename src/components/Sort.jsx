@@ -21,7 +21,7 @@ function Sort() {
             fill="#2C2C2C"
           />
         </svg>
-        <b>Сортировка по:</b>
+        <b>Сортировка&nbsp;по:</b>
         <span onClick={() => setIsActive(!isActive)}>
           {list[activeNameIndex]}
         </span>
