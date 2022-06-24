@@ -1,4 +1,4 @@
-import logo from "./../assets/img/logo.png";
+import logo from "./../assets/img/pizza-logo.svg";
 
 function Header() {
   return (
@@ -8,7 +8,7 @@ function Header() {
           <img width="38" src={logo} alt="Pizza logo" />
           <div>
             <h1>REACT-PIZZA</h1>
-            <p>Pizza pizza pizza</p>
+            <p>Дорогу горячей пицце</p>
           </div>
         </div>
         <div className="header__cart">
