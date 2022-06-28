@@ -1,25 +1,18 @@
 import React, { useState } from "react";
 
-export const Categories = () => {
-  const [categoryActive, setCategoryActive] = useState(0);
+export const Categories = (props) => {
 
-  const catrgories = [
-    "Все",
-    "Мясные",
-    "Грилль",
-    "Веганские",
-    "Острые",
-  ];
+  const catrgories = ["Все", "Мясные", "Грилль", "Веганские", "Острые"];
 
   return (
     <div className="categories">
       <ul>
         {catrgories.map((item, index) => (
           <li
-            className={categoryActive === index ? "active" : null}
+            className={props.id === index ? "active" : null}
             key={index}
             onClick={() => {
-              setCategoryActive(index);
+              props.onClickCategory(index);
             }}
           >
             {item}
@@ -30,4 +23,4 @@ export const Categories = () => {
   );
 };
 
-export default Categories ;
+export default Categories;
