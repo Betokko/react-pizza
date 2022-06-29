@@ -1,0 +1,28 @@
+.root {
+    display: flex;
+    justify-content: center;
+
+
+    li {
+        a {
+            width: 40px;
+            height: 40px;
+            color: rgb(177, 166, 141);
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid rgb(177, 166, 141);
+            border-radius: 30px;
+
+            margin: 0 5px;
+            text-align: center;
+
+            &:hover {
+                background-color: rgb(177, 166, 141);
+                color: #fff;
+            }
+        }
+
+    }
+
+    :global {}
+}
