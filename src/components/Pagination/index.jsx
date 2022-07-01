@@ -1,15 +1,15 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 
-import styles from './Pagination.module.scss'
+import styles from "./Pagination.module.scss";
 
-const Pagination = () => {
+const Pagination = ({ onChangePage }) => {
   return (
     <ReactPaginate
-    className={styles.root}
+      className={styles.root}
       breakLabel="..."
       nextLabel=">"
-      onPageChange={(evt) => console.log(evt)}
+      onPageChange={(evt) => onChangePage(evt.selected + 1)}
       pageRangeDisplayed={8}
       pageCount={3}
       previousLabel="<"

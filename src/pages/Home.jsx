@@ -1,13 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
-import Pagination from '../components/Pagination'
+import Pagination from "../components/Pagination";
+import { SearchContext } from "../App";
 
-const Home = ({ searchValue }) => {
+const Home = () => {
+  const { searchValue } = useContext(SearchContext);
   const [items, setItems] = useState([]);
+  const [currentPage, setCurrenPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
   const [sortId, setSortId] = useState({
@@ -22,7 +25,7 @@ const Home = ({ searchValue }) => {
     const search = searchValue ? `&search=${searchValue}` : "";
     setIsLoading(true);
     fetch(
-      `https://62b434d3a36f3a973d2e80f4.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`
+      `https://62b434d3a36f3a973d2e80f4.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
     )
       .then((res) => res.json())
       .then((res) => {
@@ -31,7 +34,7 @@ const Home = ({ searchValue }) => {
       })
       .catch((err) => console.log(err));
     window.scroll(0, 0);
-  }, [categoryId, sortId, searchValue]);
+  }, [categoryId, sortId, searchValue, currentPage]);
 
   const pizzas = items
     .filter((obj) =>
@@ -51,7 +54,7 @@ const Home = ({ searchValue }) => {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeleton : pizzas}</div>
-      <Pagination />
+      <Pagination onChangePage={(num) => setCurrenPage(num)} />
     </div>
   );
 };
