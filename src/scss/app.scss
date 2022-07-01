@@ -21,14 +21,15 @@ body {
   }
 
   .header {
-    @media (max-width: 480px) {
+    @media (max-width: 880px) {
       padding: 20px 0 0;
     }
 
     .container {
-      @media (max-width: 480px) {
+      @media (max-width: 880px) {
         display: flex;
         flex-direction: column;
+        gap: 10px
       }
 
       a {
