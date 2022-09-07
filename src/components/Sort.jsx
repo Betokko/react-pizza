@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 function Sort(props) {
   const [isActive, setIsActive] = useState(false);
-  const [activeNameIndex, setActiveNameIndex] = useState(0);
+  // const [activeNameIndex, setActiveNameIndex] = useState(0);
 
   const list = [
     { name: "популярности (DESC)", sort: "raiting" },

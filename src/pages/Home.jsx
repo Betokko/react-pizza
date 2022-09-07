@@ -1,11 +1,11 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from 'react';
 
-import Categories from "../components/Categories";
-import Sort from "../components/Sort";
-import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
-import Skeleton from "../components/PizzaBlock/Skeleton";
-import Pagination from "../components/Pagination";
-import { SearchContext } from "../App";
+import Categories from '../components/Categories';
+import Sort from '../components/Sort';
+import PizzaBlock from '../components/PizzaBlock/PizzaBlock';
+import Skeleton from '../components/PizzaBlock/Skeleton';
+import Pagination from '../components/Pagination';
+import { SearchContext } from '../App';
 
 const Home = () => {
   const { searchValue } = useContext(SearchContext);
@@ -14,18 +14,18 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
   const [sortId, setSortId] = useState({
-    name: "популярности",
-    sort: "raiting",
+    name: 'популярности',
+    sort: 'raiting',
   });
 
   useEffect(() => {
-    const order = sortId.sort.includes("-") ? "asc" : "desc";
-    const sortBy = sortId.sort.replace("-", "");
-    const category = categoryId > 0 ? `category=${categoryId}` : "";
-    const search = searchValue ? `&search=${searchValue}` : "";
+    const order = sortId.sort.includes('-') ? 'asc' : 'desc';
+    const sortBy = sortId.sort.replace('-', '');
+    const category = categoryId > 0 ? `category=${categoryId}` : '';
+    const search = searchValue ? `&search=${searchValue}` : '';
     setIsLoading(true);
     fetch(
-      `https://62b434d3a36f3a973d2e80f4.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+      `https://62b434d3a36f3a973d2e80f4.mockapi.io/items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}${search}`
     )
       .then((res) => res.json())
       .then((res) => {

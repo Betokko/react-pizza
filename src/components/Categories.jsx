@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 export const Categories = (props) => {
 
   const catrgories = ["Все", "Мясные", "Грилль", "Веганские", "Острые"];
