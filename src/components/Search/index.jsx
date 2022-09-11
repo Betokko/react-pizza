@@ -1,11 +1,34 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useCallback, useState } from 'react';
+import debounce from 'lodash.debounce';
 
-import {SearchContext} from '../../App'
+import { SearchContext } from '../../App';
 
-import styles from "./Search.module.scss";
+import styles from './Search.module.scss';
 
 export const Search = () => {
-  const { searchValue, setSearchValue } = useContext(SearchContext);
+  const [value, setValue] = useState('')
+  const { setSearchValue } = useContext(SearchContext);
+  const ref = useRef();
+
+  const handleClearButton = () => {
+    setValue('');
+    ref.current.focus();
+  };
+
+  const updateSeatchValue = useCallback(
+    debounce((value) => {
+      setSearchValue(value);
+    }, 1000),
+    []
+  );
+
+  const onChangeInput = (evt) => {
+    const inputValue = evt.target.value;
+    setValue(inputValue)
+    updateSeatchValue(inputValue)
+  }
+
+
   return (
     <div className={styles.root}>
       <svg
@@ -19,15 +42,14 @@ export const Search = () => {
         <path d="M0 0h48v48h-48z" fill="none" />
       </svg>
       <input
+        ref={ref}
         className={styles.input}
         placeholder="Поиск пиццы..."
-        value={searchValue}
-        onChange={(evt) => {
-          setSearchValue(evt.target.value);
-        }}
+        value={value}
+        onChange={onChangeInput}
       ></input>
-      {searchValue && (
-        <i className={styles.close} onClick={() => setSearchValue("")}>
+      {value && (
+        <i className={styles.close} onClick={handleClearButton}>
           &#215;
         </i>
       )}
