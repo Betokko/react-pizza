@@ -43,7 +43,6 @@ function Sort() {
                 key={index}
                 onClick={() => {
                   setIsActive(false);
-                  console.log(setSortId(obj));
                   dispatch(setSortId(obj));
                 }}
                 className={sort.sort === obj.sort ? 'active ' : null}

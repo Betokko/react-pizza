@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import qs from 'qs'
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategory, setCurrenPage } from '../redux/filterSlice';
@@ -20,32 +21,44 @@ const Home = () => {
   const categoryId = useSelector((state) => state.filter.categoryId);
   const sortId = useSelector((state) => state.filter.sort);
   const currentPage = useSelector((state) => state.filter.currentPage)
-
+  
   useEffect(() => {
     const order = sortId.sortProperty.includes('-') ? 'asc' : 'desc';
     const sortBy = sortId.sortProperty.replace('-', '');
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
+    const fetchData = async () => await axios.get(`https://62b434d3a36f3a973d2e80f4.mockapi.io/items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}${search}`)
     setIsLoading(true);
-
-    axios
-      .get(
-        `https://62b434d3a36f3a973d2e80f4.mockapi.io/items?page=${currentPage}&limit=8&${category}&sortBy=${sortBy}&order=${order}${search}`
-      )
-      .then((res) => {
+    const setPizzas = async () => {
+      try {
+        const res = await fetchData()
         setItems(res.data);
         setIsLoading(false);
-      });
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    setPizzas()
+      
 
     window.scroll(0, 0);
   }, [categoryId, sortId, searchValue, currentPage]);
+
+  useEffect(() => {
+    const queryString = qs.stringify({
+      sortProperty: sortId.sortProperty,
+      categoryId,
+      currentPage,
+    })
+    console.log(queryString)
+  }, [categoryId, sortId, searchValue, currentPage])
 
   const pizzas = items
     .filter((obj) =>
       obj.title.toLowerCase().includes(searchValue.toLowerCase())
     )
     .map((item) => <PizzaBlock {...item} key={item.id} />);
-  const skeleton = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
+  const skeleton = [...new Array(8)].map((_, i) => <Skeleton key={i} />);
 
   return (
     <div className="container">
