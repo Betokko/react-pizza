@@ -16,11 +16,8 @@ export const Search = () => {
   };
 
   const updateSeatchValue = useCallback(
-    debounce((value) => {
-      setSearchValue(value);
-    }, 1000),
-    []
-  );
+    debounce(value => setSearchValue(value), 1000),
+  []);
 
   const onChangeInput = (evt) => {
     const inputValue = evt.target.value;
