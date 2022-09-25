@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSortId } from '../redux/filterSlice';
 
@@ -11,15 +11,27 @@ export const list = [
   { name: 'алфавиту (ASC)', sortProperty: '-title' },
 ];
 
+
 function Sort() {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.filter.sort);
-
+  const sortRef = useRef();
+  
   const [isActive, setIsActive] = useState(false);
+  
+  useEffect(() => {
+    const handleClickOutside = (evt) => {
+      if (!evt.path.includes(sortRef.current)) {
+        setIsActive(false)
+      }
+    }
+    document.body.addEventListener('click', handleClickOutside)
+    return () => document.body.removeEventListener('click', handleClickOutside)
+  }, [])
 
 
   return (
-    <div className="sort">
+    <div className="sort" ref={sortRef}>
       <div className="sort__label">
         <svg
           width="10"
